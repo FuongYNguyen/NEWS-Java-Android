@@ -7,9 +7,13 @@
     <item
         android:id="@+id/navigation_dashboard"
         android:icon="@drawable/baseline_category_24"
-        android:title="Dashboard" />
+        android:title="Category" />
     <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/icons8_search"
-        android:title="Notifications" />
+        android:title="Search" />
+    <item
+        android:id="@+id/navigation_account"
+        android:icon="@drawable/baseline_account_circle_24"
+        android:title="Account" />
 </menu>

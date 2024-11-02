@@ -45,18 +45,28 @@ public class MyDataHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    void addNews(String title, String content) {
+//    void addNews(String title, String content) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        ContentValues cv = new ContentValues();
+//        cv.put(COLUMN_TITLE, title);
+//        cv.put(COLUMN_CONTENT, content);
+//        long result = db.insert(TABLE_NAME, null, cv);
+//        if (result == -1) {
+//            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+//        } else {
+//            Toast.makeText(context, "Successfully!", Toast.LENGTH_SHORT).show();
+//        }
+//    }
+    void addData(String tableName, ContentValues values) {
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put(COLUMN_TITLE, title);
-        cv.put(COLUMN_CONTENT, content);
-        long result = db.insert(TABLE_NAME, null, cv);
+        long result = db.insert(tableName, null, values);
         if (result == -1) {
             Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(context, "Successfully!", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     Cursor readAllData(String TABLE_NAME_input) {
         String query = "SELECT * FROM " + TABLE_NAME_input;
