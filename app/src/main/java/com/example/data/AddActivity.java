@@ -2,6 +2,7 @@ package com.example.data;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,7 +24,8 @@ public class AddActivity extends AppCompatActivity {
         title_input = findViewById(R.id.title_input);
         content_input = findViewById(R.id.content_input);
         createNews_button = findViewById(R.id.createNews_button);
-        createNews_button.setOnClickListener(new View.OnClickListener(){
+
+        createNews_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 MyDataHelper myDB = new MyDataHelper(AddActivity.this);
@@ -31,7 +33,10 @@ public class AddActivity extends AppCompatActivity {
                 cv.put(COLUMN_TITLE, title_input.getText().toString().trim());
                 cv.put(COLUMN_CONTENT, content_input.getText().toString().trim());
                 myDB.addData("news", cv);
-                //myDB.addNews(title_input.getText().toString().trim(), content_input.getText().toString().trim());
+
+                Intent resultIntent = new Intent();
+                setResult(RESULT_OK, resultIntent);
+                finish();
             }
         });
     }

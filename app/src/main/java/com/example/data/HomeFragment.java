@@ -13,16 +13,21 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
+    private static final int ADD_ACTIVITY_REQUEST_CODE = 1;
     RecyclerView recyclerView;
     FloatingActionButton add_button;
     MyDataHelper myDataHelper;
     ArrayList<String> news_id, news_title, news_content;
     CustomAdapter customAdapter;
+
+    private ActivityResultLauncher<Intent> addActivityResultLauncher;
 
     @Nullable
     @Override
@@ -43,11 +48,20 @@ public class HomeFragment extends Fragment {
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        addActivityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == getActivity().RESULT_OK) {
+                        storeDataInArrays();
+                        customAdapter.notifyDataSetChanged();
+                    }
+                });
+
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), AddActivity.class);
-                startActivity(intent);
+                addActivityResultLauncher.launch(intent);
             }
         });
 
@@ -56,6 +70,9 @@ public class HomeFragment extends Fragment {
 
     void storeDataInArrays() {
         Cursor cursor = myDataHelper.readAllData("news");
+        news_id.clear();
+        news_title.clear();
+        news_content.clear();
         if (cursor.getCount() == 0) {
             Toast.makeText(getContext(), "NO DATA", Toast.LENGTH_SHORT).show();
         } else {
