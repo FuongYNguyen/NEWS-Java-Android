@@ -1,6 +1,8 @@
 package com.example.data;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,10 +34,21 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.news_id_txt.setText(String.valueOf(news_id.get(position)));
         holder.news_title_txt.setText(String.valueOf(news_title.get(position)));
         holder.news_content_txt.setText(String.valueOf(news_content.get(position)));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DetailActivity.class);
+                intent.putExtra("news_id", news_id.get(position));
+                intent.putExtra("news_title", news_title.get(position));
+                intent.putExtra("news_content", news_content.get(position));
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
