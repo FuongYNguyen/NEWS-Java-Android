@@ -22,10 +22,10 @@
                 app:layout_constraintBottom_toTopOf="@+id/news_title_txt"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/news_thumbnail_txt" />
+                app:layout_constraintTop_toTopOf="@+id/thumbnail_input_img" />
 
             <ImageView
-                android:id="@+id/news_thumbnail_txt"
+                android:id="@+id/thumbnail_input_img"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:scaleType="centerCrop"
