@@ -36,8 +36,9 @@ public class MainActivity extends AppCompatActivity {
                     selectedFragment = new CategoryFragment();
                 }else if (itemId == R.id.navigation_notifications) {
                     selectedFragment = new SearchFragment();
-                }
-                if (selectedFragment != null) {
+                } else if (itemId == R.id.navigation_account) {
+                    selectedFragment = new AccountFragment();
+                }if (selectedFragment != null) {
                     loadFragment(selectedFragment);
                 }
                 return true;
