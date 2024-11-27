@@ -24,7 +24,7 @@ public class NewsActivity extends AppCompatActivity {
             // Tạo một bản sao của i
             final int index = i;
 
-            // Inflate bài viết từ file post_item.xml
+            // Inflate bài viết từ file activity_addnews.xml
             View Addnews = LayoutInflater.from(this).inflate(R.layout.activity_addnews, null);
 
             // Gán nội dung tiêu đề và caption
