@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AddActivity">
+    android:padding="16dp">
 
     <EditText
         android:id="@+id/title_input"
@@ -18,6 +16,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Content" />
+
+    <EditText
+        android:id="@+id/categoryId_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Category ID"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/thumbnail_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Thumbnail"
+        android:focusable="false"
+        android:clickable="false" />
+
+    <Button
+        android:id="@+id/selectThumbnail_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Thumbnail" />
+
+    <EditText
+        android:id="@+id/shortDescription_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Short Description" />
 
     <Button
         android:id="@+id/createNews_button"

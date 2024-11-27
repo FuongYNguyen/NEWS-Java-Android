@@ -24,7 +24,7 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
     FloatingActionButton add_button;
     MyDataHelper myDataHelper;
-    ArrayList<String> news_id, news_title, news_content;
+    ArrayList<String> news_id, news_title, news_content, news_image;
     CustomAdapter customAdapter;
 
     private ActivityResultLauncher<Intent> addActivityResultLauncher;
@@ -41,10 +41,11 @@ public class HomeFragment extends Fragment {
         news_id = new ArrayList<>();
         news_title = new ArrayList<>();
         news_content = new ArrayList<>();
+        news_image = new ArrayList<>();
 
         storeDataInArrays();
 
-        customAdapter = new CustomAdapter(getContext(), news_id, news_title, news_content);
+        customAdapter = new CustomAdapter(getContext(), news_id, news_title, news_content, news_image);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -73,13 +74,15 @@ public class HomeFragment extends Fragment {
         news_id.clear();
         news_title.clear();
         news_content.clear();
+        news_image.clear();
         if (cursor.getCount() == 0) {
             Toast.makeText(getContext(), "NO DATA", Toast.LENGTH_SHORT).show();
         } else {
             while (cursor.moveToNext()) {
                 news_id.add(cursor.getString(0));
                 news_title.add(cursor.getString(1));
-                news_content.add(cursor.getString(2));
+                news_content.add(cursor.getString(3));
+                news_image.add(cursor.getString(2));
             }
         }
     }
