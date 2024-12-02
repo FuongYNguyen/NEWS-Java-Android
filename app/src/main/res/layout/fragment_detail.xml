@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,9 +16,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:navigationIcon="@drawable/ic_arrow_back"/>
 
-    <!-- Container for Fragment -->
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="0dp"
@@ -26,6 +27,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
+
         <ScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
@@ -36,16 +38,40 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <!-- Tiêu đề bài báo -->
+                <TextView
+                    android:id="@+id/articleTitleTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:padding="8dp"/>
+
+                <!-- Thumbnail bài báo -->
+                <ImageView
+                    android:id="@+id/articleThumbnailImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:padding="8dp"/>
+
                 <!-- Nội dung bài báo -->
                 <TextView
                     android:id="@+id/articleTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Bài báo sẽ được hiển thị ở đây..."
                     android:textSize="18sp"
                     android:padding="8dp"/>
 
-                <!-- Phần bình luận, ban đầu ẩn đi -->
+                <!-- Category bài báo -->
+                <TextView
+                    android:id="@+id/articleCategoryTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:padding="8dp"
+                    android:textStyle="italic"/>
+
+                <!-- Phần bình luận -->
                 <LinearLayout
                     android:id="@+id/commentSection"
                     android:layout_width="match_parent"
@@ -57,15 +83,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Bình luận:"
-                        android:textSize="16sp"
-                        android:padding="8dp"/>
-
-                    <!-- Bình luận của người dùng -->
-                    <TextView
-                        android:id="@+id/commentTextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Phần bình luận sẽ được hiển thị ở đây..."
                         android:textSize="16sp"
                         android:padding="8dp"/>
 
@@ -83,6 +100,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Gửi"/>
+
+                    <!-- Bình luận của người dùng sẽ được thêm động tại đây -->
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
