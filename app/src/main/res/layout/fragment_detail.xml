@@ -45,7 +45,14 @@
                     android:layout_height="wrap_content"
                     android:textSize="24sp"
                     android:padding="8dp"/>
-
+                <!-- Category bài báo -->
+                <TextView
+                    android:id="@+id/articleCategoryTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:padding="8dp"
+                    android:textStyle="italic"/>
                 <!-- Thumbnail bài báo -->
                 <ImageView
                     android:id="@+id/articleThumbnailImageView"
@@ -61,15 +68,6 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:padding="8dp"/>
-
-                <!-- Category bài báo -->
-                <TextView
-                    android:id="@+id/articleCategoryTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:padding="8dp"
-                    android:textStyle="italic"/>
 
                 <!-- Phần bình luận -->
                 <LinearLayout
