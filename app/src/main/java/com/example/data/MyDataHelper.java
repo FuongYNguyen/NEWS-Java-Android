@@ -113,4 +113,9 @@ public class MyDataHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(query, null);
     }
+    Cursor getbyNewsId(String newsId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM news WHERE id = ?", new String[]{newsId});
+    }
+
 }

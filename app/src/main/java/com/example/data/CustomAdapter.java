@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
+
     Context context;
     ArrayList<String> news_id, news_title, news_content, news_image;
 
@@ -51,8 +52,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             public void onClick(View v) {
                 Intent intent = new Intent(context, DetailActivity.class);
                 intent.putExtra("news_id", news_id.get(position));
-                intent.putExtra("news_title", news_title.get(position));
-                intent.putExtra("news_content", news_content.get(position));
                 context.startActivity(intent);
             }
         });
