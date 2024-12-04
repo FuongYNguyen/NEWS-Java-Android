@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".LoginFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="80dp"
+        android:padding="20dp">
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/baseline_arrow_back_ios_24"
+            android:layout_marginBottom="30dp" />
+        <EditText
+            android:id="@+id/signup_email"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:autofillHints="Email"
+            android:background="@drawable/lavender_border"
+            android:drawableStart="@drawable/baseline_mail_24"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/inter"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:padding="15dp"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/signup_password"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:autofillHints="Password"
+            android:background="@drawable/lavender_border"
+            android:drawableStart="@drawable/baseline_lock_24"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/inter"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:padding="15dp"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/signup_confirm"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:autofillHints="Confirm Password"
+            android:background="@drawable/lavender_border"
+            android:drawableStart="@drawable/baseline_password_24"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/inter"
+            android:hint="@string/confirm_password"
+            android:inputType="textPassword"
+            android:padding="15dp"
+            android:textSize="13sp"
+
+            />
+
+        <Button
+            android:id="@+id/signup_button"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:padding="10dp"
+            android:background="@drawable/mybutton"
+            android:fontFamily="@font/inter_extrabold"
+            android:text="@string/sign_up"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:radius="50dp"
+            android:layout_gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/loginRedirectText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/inter"
+            android:padding="8dp"
+            android:text="@string/already_an_user_login"
+            android:textColor="@color/red77"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+
+</LinearLayout>
