@@ -117,5 +117,21 @@ public class MyDataHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM news WHERE id = ?", new String[]{newsId});
     }
+    Cursor getByTitle(String keyword) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM news WHERE title LIKE ?";
+        return db.rawQuery(query, new String[]{"%" + keyword + "%"});
+    }
+    public void deleteData(String tableName, String whereClause, String[] whereArgs) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result = db.delete(tableName, whereClause, whereArgs);
+        if (result == -1) {
+            Toast.makeText(context, "Failed to Delete", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Deleted Successfully!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 
 }
