@@ -159,5 +159,17 @@ public class MyDataHelper extends SQLiteOpenHelper {
         Cursor cursor = MyDatabase.rawQuery("Select * from user where email = ? and password = ?", new String[]{email, password});
         return cursor.getCount() > 0;
     }
+    public int getUserId(String email, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT id FROM " + TABLE_USER + " WHERE email = ? AND password = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{email, password});
+        int userId = -1; // Default value if no user is found
+
+        if (cursor.moveToFirst()) {
+            userId = cursor.getInt(0);
+        }
+        cursor.close();
+        return userId;
+    }
 }
 
