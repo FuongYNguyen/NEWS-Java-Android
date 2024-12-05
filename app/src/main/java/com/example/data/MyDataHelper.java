@@ -160,4 +160,3 @@ public class MyDataHelper extends SQLiteOpenHelper {
         return cursor.getCount() > 0;
     }
 }
-//test github nhanh cua Vi
