@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminAccountFragment">
-
+    tools:context=".UserAccountFragment">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -31,7 +30,7 @@
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
                 android:textSize="30sp"
-                android:text="Xin chào Admin!"
+                android:text="Xin chào User!"
                 />
 
             <com.google.android.material.imageview.ShapeableImageView
@@ -65,35 +64,6 @@
             android:textColor="#000000"
             android:textSize="14sp" />
 
-        <Button
-            android:id="@+id/news_button"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:background="#0000"
-            android:drawableStart="@drawable/baseline_newspaper_24"
-            android:drawablePadding="8dp"
-            android:fontFamily="@font/inter_medium"
-            android:text="Quản lý bài báo"
-            android:textAlignment="textStart"
-            android:textAllCaps="false"
-            android:textColor="#000000"
-            android:textSize="14sp" />
-
-        <Button
-            android:id="@+id/category_button"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:background="#0000"
-            android:drawableStart="@drawable/baseline_category_24_pu"
-            android:drawablePadding="8dp"
-            android:fontFamily="@font/inter_medium"
-            android:text="Quản lý thể loại"
-            android:textAlignment="textStart"
-            android:textAllCaps="false"
-            android:textColor="#000000"
-            android:textSize="14sp" />
 
         <Button
             android:id="@+id/logoutButton"
@@ -112,4 +82,5 @@
 
 
     </LinearLayout>
+
 </FrameLayout>

@@ -171,5 +171,25 @@ public class MyDataHelper extends SQLiteOpenHelper {
         cursor.close();
         return userId;
     }
+
+    public int getRoleId(String email, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Adjust query to use a JOIN if needed to fetch details from the Roles table
+        String query = "SELECT roleid FROM " + TABLE_USER + " WHERE email = ? AND password = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{email, password});
+
+        int roleid = -1; // Default value if no user is found
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                roleid = cursor.getInt(0); // Get role ID from the user table
+            }
+            cursor.close();
+        }
+
+        return roleid;
+    }
+
 }
 

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,7 +44,18 @@ public class MainActivity extends AppCompatActivity {
                     selectedFragment = new SearchFragment();
                 } else if (itemId == R.id.navigation_account) {
                     if (isUserLoggedIn()) {
-                        selectedFragment = new AccountFragment();
+                        // Fetch roleId from SharedPreferences
+                        SharedPreferences sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE);
+                        int roleId = sharedPreferences.getInt("roleId", -1);
+                        // Check the roleId and navigate accordingly
+                        if (roleId == 1) {
+                            selectedFragment = new AdminAccountFragment(); // Admin role
+                        } else if (roleId == 2) {
+                            selectedFragment = new UserAccountFragment(); // Regular user role
+                        } else {
+                            Toast.makeText(MainActivity.this, "Invalid Role. Please contact support.", Toast.LENGTH_SHORT).show();
+                            return true; // Prevent fragment loading
+                        }
                     } else {
                         // Redirect to LoginActivity if not logged in
                         Intent intent = new Intent(MainActivity.this, LoginActivity.class);

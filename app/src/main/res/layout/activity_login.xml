@@ -54,16 +54,16 @@
             android:id="@+id/login_button"
             android:layout_width="300dp"
             android:layout_height="50dp"
+            android:layout_gravity="center"
             android:layout_marginTop="50dp"
-            android:padding="10dp"
             android:background="@drawable/mybutton"
             android:fontFamily="@font/inter_extrabold"
-            android:text="@string/sign_in"
-            android:textColor="@color/white"
-            android:textSize="18sp"
+            android:padding="10dp"
             android:radius="50dp"
-            android:layout_gravity="center"
-            />
+            android:text="Đăng nhập"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
 
         <TextView
@@ -74,7 +74,7 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/inter"
             android:padding="8dp"
-            android:text="@string/not_yet_registered_sign_up"
+            android:text="Chưa có tài khoản? Đăng kí tại đây"
             android:textColor="@color/red77"
             android:textSize="12sp" />
     </LinearLayout>
