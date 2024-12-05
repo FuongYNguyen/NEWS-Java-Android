@@ -58,6 +58,7 @@ public class MyDataHelper extends SQLiteOpenHelper {
                         "thumbnail TEXT, " +
                         "shortDescription TEXT, " +
                         "content TEXT NOT NULL, " +
+                        "date_created TIMESTAMP, " +
                         "categoryId INTEGER NOT NULL, " +
                         "FOREIGN KEY(categoryId) REFERENCES " + TABLE_CATEGORY + "(id));";
         db.execSQL(createNewsTable);
@@ -68,7 +69,6 @@ public class MyDataHelper extends SQLiteOpenHelper {
                         " (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "content TEXT NOT NULL, " +
                         "date_created TIMESTAMP, " +
-                        "date_edited TIMESTAMP, " +
                         "userId INTEGER NOT NULL, " +
                         "newId INTEGER NOT NULL, " +
                         "FOREIGN KEY(userId) REFERENCES " + TABLE_USER + "(id), " +
@@ -160,3 +160,4 @@ public class MyDataHelper extends SQLiteOpenHelper {
         return cursor.getCount() > 0;
     }
 }
+

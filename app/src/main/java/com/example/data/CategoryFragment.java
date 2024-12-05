@@ -1,64 +1,88 @@
 package com.example.data;
 
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CategoryFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+
 public class CategoryFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private static final int ADD_ACTIVITY_REQUEST_CODE = 1;
+    RecyclerView recyclerView;
+    FloatingActionButton add_button;
+    MyDataHelper myDataHelper;
+    ArrayList<String> category_id, category_name;
+    CustomAdapter customAdapter;
 
-    public CategoryFragment() {
-        // Required empty public constructor
-    }
+    private ActivityResultLauncher<Intent> addActivityResultLauncher;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CategoryFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CategoryFragment newInstance(String param1, String param2) {
-        CategoryFragment fragment = new CategoryFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        recyclerView = view.findViewById(R.id.recyclerView);
+        add_button = view.findViewById(R.id.add_button);
+
+        myDataHelper = new MyDataHelper(getContext());
+        category_id = new ArrayList<>();
+        category_name = new ArrayList<>();
+
+        storeDataInArrays();
+
+        customAdapter = new CustomAdapter(getContext(), category_id, category_name, null, null,null,null,'3');
+        recyclerView.setAdapter(customAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        addActivityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == getActivity().RESULT_OK) {
+                        storeDataInArrays();
+                        customAdapter.notifyDataSetChanged();
+                    }
+                });
+
+        add_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), AddCategoryActivity.class);
+                addActivityResultLauncher.launch(intent);
+            }
+        });
+
+        return view;
+    }
+
+    void storeDataInArrays() {
+        Cursor cursor = myDataHelper.readAllData("category");
+        category_id.clear();
+        category_name.clear();
+
+        if (cursor.getCount() == 0) {
+            Toast.makeText(getContext(), "NO DATA", Toast.LENGTH_SHORT).show();
+        } else {
+            while (cursor.moveToNext()) {
+                category_id.add(cursor.getString(0));
+                category_name.add(cursor.getString(1));
+            }
         }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_category, container, false);
     }
 }
