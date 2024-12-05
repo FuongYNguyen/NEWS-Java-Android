@@ -5,18 +5,18 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 public class MyDataHelper extends SQLiteOpenHelper {
     private Context context;
     public static final String DATABASE_NAME = "news.db";
-    public static final int DATABASE_VERSION = 3; // Tăng phiên bản cơ sở dữ liệu
-    public static final String TABLE_NAME = "news";
-    public static final String COLUMN_ID = "id";
-    public static final String COLUMN_TITLE = "title";
-    public static final String COLUMN_CONTENT = "content";
+    public static final int DATABASE_VERSION = 5;
+    public static final String TABLE_NEWS = "News";
+    public static final String TABLE_CATEGORY = "Category";
+    public static final String TABLE_ROLE = "role";
+    public static final String TABLE_USER = "user";
+    public static final String TABLE_COMMENT = "Comment";
 
     public MyDataHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -24,44 +24,79 @@ public class MyDataHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String createNewsTable =
-                "CREATE TABLE " + TABLE_NAME +
-                        " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        COLUMN_TITLE + " TEXT, " +
-                        COLUMN_CONTENT + " TEXT);";
-        sqLiteDatabase.execSQL(createNewsTable);
+    public void onCreate(SQLiteDatabase db) {
+        // Tạo bảng Role
+        String createRoleTable =
+                "CREATE TABLE " + TABLE_ROLE +
+                        " (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "name TEXT NOT NULL, " +
+                        "code TEXT NOT NULL UNIQUE, " +
+                        "createddate TIMESTAMP, " +
+                        "modifieddate TIMESTAMP, " +
+                        "createdby TEXT, " +
+                        "modifiedby TEXT);";
+        db.execSQL(createRoleTable);
 
+        // Tạo bảng User
+        String createUserTable =
+                "CREATE TABLE " + TABLE_USER +
+                        " (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "username TEXT NOT NULL, " +
+                        "password TEXT NOT NULL, " +
+                        "fullname TEXT, " +
+                        "status INTEGER NOT NULL, " +
+                        "roleid INTEGER NOT NULL, " +
+                        "createddate TIMESTAMP, " +
+                        "modifieddate TIMESTAMP, " +
+                        "createdby TEXT, " +
+                        "modifiedby TEXT, " +
+                        "FOREIGN KEY(roleid) REFERENCES " + TABLE_ROLE + "(id));";
+        db.execSQL(createUserTable);
+
+        // Tạo bảng Category
         String createCategoryTable =
-                "CREATE TABLE category " +
-                        "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        "name TEXT);";
-        sqLiteDatabase.execSQL(createCategoryTable);
+                "CREATE TABLE " + TABLE_CATEGORY +
+                        " (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "name TEXT NOT NULL);";
+        db.execSQL(createCategoryTable);
 
-        String createUsersTable =
-                "create TABLE Users(email TEXT primary key, password TEXT)";
-        sqLiteDatabase.execSQL(createUsersTable);
+        // Tạo bảng News
+        String createNewsTable =
+                "CREATE TABLE " + TABLE_NEWS +
+                        " (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "title TEXT NOT NULL, " +
+                        "thumbnail TEXT, " +
+                        "shortDescription TEXT, " +
+                        "content TEXT NOT NULL, " +
+                        "categoryId INTEGER NOT NULL, " +
+                        "FOREIGN KEY(categoryId) REFERENCES " + TABLE_CATEGORY + "(id));";
+        db.execSQL(createNewsTable);
+
+        // Tạo bảng Comment
+        String createCommentTable =
+                "CREATE TABLE " + TABLE_COMMENT +
+                        " (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "content TEXT NOT NULL, " +
+                        "date_created TIMESTAMP, " +
+                        "date_edited TIMESTAMP, " +
+                        "userId INTEGER NOT NULL, " +
+                        "newId INTEGER NOT NULL, " +
+                        "FOREIGN KEY(userId) REFERENCES " + TABLE_USER + "(id), " +
+                        "FOREIGN KEY(newId) REFERENCES " + TABLE_NEWS + "(id));";
+        db.execSQL(createCommentTable);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS category");
-        onCreate(sqLiteDatabase);
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_COMMENT);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NEWS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CATEGORY);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ROLE);
+        onCreate(db);
     }
 
-//    void addNews(String title, String content) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues cv = new ContentValues();
-//        cv.put(COLUMN_TITLE, title);
-//        cv.put(COLUMN_CONTENT, content);
-//        long result = db.insert(TABLE_NAME, null, cv);
-//        if (result == -1) {
-//            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
-//        } else {
-//            Toast.makeText(context, "Successfully!", Toast.LENGTH_SHORT).show();
-//        }
-//    }
+    // Hàm thêm dữ liệu vào bảng
     void addData(String tableName, ContentValues values) {
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.insert(tableName, null, values);
@@ -72,34 +107,31 @@ public class MyDataHelper extends SQLiteOpenHelper {
         }
     }
 
-
-    Cursor readAllData(String TABLE_NAME_input) {
-        String query = "SELECT * FROM " + TABLE_NAME_input;
+    // Hàm đọc tất cả dữ liệu từ một bảng
+    Cursor readAllData(String tableName) {
+        String query = "SELECT * FROM " + tableName;
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = null;
-        if (db != null) {
-            cursor = db.rawQuery(query, null);
+        return db.rawQuery(query, null);
+    }
+    Cursor getbyNewsId(String newsId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM news WHERE id = ?", new String[]{newsId});
+    }
+    Cursor getByTitle(String keyword) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM news WHERE title LIKE ?";
+        return db.rawQuery(query, new String[]{"%" + keyword + "%"});
+    }
+    public void deleteData(String tableName, String whereClause, String[] whereArgs) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result = db.delete(tableName, whereClause, whereArgs);
+        if (result == -1) {
+            Toast.makeText(context, "Failed to Delete", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Deleted Successfully!", Toast.LENGTH_SHORT).show();
         }
-        return cursor;
     }
 
-    public Boolean insertData(String email, String password){
-        SQLiteDatabase MyDatabase = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("email", email);
-        contentValues.put("password", password);
-        long result = MyDatabase.insert("Users", null, contentValues);
-        return result != -1;
-    }
-    public Boolean checkEmail(String email){
-        SQLiteDatabase MyDatabase = this.getWritableDatabase();
-        Cursor cursor = MyDatabase.rawQuery("Select * from Users where email = ?", new String[]{email});
-        return cursor.getCount() > 0;
-    }
-    public Boolean checkEmailPassword(String email, String password){
-        SQLiteDatabase MyDatabase = this.getWritableDatabase();
-        Cursor cursor = MyDatabase.rawQuery("Select * from Users where email = ? and password = ?", new String[]{email, password});
-        return cursor.getCount() > 0;
-    }
+
+
 }
-//test github nhanh cua Vi

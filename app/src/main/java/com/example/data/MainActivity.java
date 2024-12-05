@@ -36,10 +36,10 @@ public class MainActivity extends AppCompatActivity {
                     selectedFragment = new CategoryFragment();
                 }else if (itemId == R.id.navigation_notifications) {
                     selectedFragment = new SearchFragment();
-                }else if (itemId == R.id.navigation_account) {
-
-                    selectedFragment = new AccountFragment();
+                } else if (itemId == R.id.navigation_account) {
+                    selectedFragment = new NewsManageFragment();
                 }
+
                 if (selectedFragment != null) {
                     loadFragment(selectedFragment);
                 }
