@@ -45,12 +45,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Short Description" />
-    <EditText
-        android:id="@+id/createdDate_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Date"
-        android:inputType="datetime" />
     <Button
         android:id="@+id/createNews_button"
         android:layout_width="wrap_content"
