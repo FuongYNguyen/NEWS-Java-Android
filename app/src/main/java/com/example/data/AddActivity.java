@@ -16,7 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AddActivity extends AppCompatActivity {
-    EditText title_input, content_input, categoryId_input, thumbnail_input, shortDescription_input;
+    EditText title_input, content_input, categoryId_input, thumbnail_input, shortDescription_input, createdDate_input;
     Button createNews_button, selectThumbnail_button;
     Uri selectedImageUri;
 
@@ -24,6 +24,7 @@ public class AddActivity extends AppCompatActivity {
     public static final String COLUMN_CONTENT = "content";
     public static final String COLUMN_CATEGORY_ID = "categoryId";
     public static final String COLUMN_THUMBNAIL = "thumbnail";
+    public static final String COLUMN_CREATEDDATE = "date_created";
     public static final String COLUMN_SHORT_DESCRIPTION = "shortDescription";
 
     @SuppressLint("WrongViewCast")
@@ -38,6 +39,7 @@ public class AddActivity extends AppCompatActivity {
         categoryId_input = findViewById(R.id.categoryId_input);
         thumbnail_input = findViewById(R.id.thumbnail_input);
         shortDescription_input = findViewById(R.id.shortDescription_input);
+        createdDate_input= findViewById(R.id.createdDate_input);
         createNews_button = findViewById(R.id.createNews_button);
         selectThumbnail_button = findViewById(R.id.selectThumbnail_button);
 
@@ -86,7 +88,7 @@ public class AddActivity extends AppCompatActivity {
                     cv.put(COLUMN_THUMBNAIL, "No thumbnail");
                 }
                 cv.put(COLUMN_SHORT_DESCRIPTION, shortDescription_input.getText().toString().trim());
-
+                cv.put(COLUMN_CREATEDDATE, createdDate_input.getText().toString().trim());
                 // Thêm dữ liệu vào bảng News
                 myDB.addData("News", cv);
 

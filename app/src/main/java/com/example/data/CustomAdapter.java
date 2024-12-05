@@ -46,6 +46,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             view = inflater.inflate(R.layout.my_row2, parent, false);
         } else if (typeRow == '2') {
             view = inflater.inflate(R.layout.row_news_manage, parent, false);
+        } else if (typeRow == '3') {
+            view = inflater.inflate(R.layout.row_category, parent, false);
         } else {
             // Inflate my_row.xml
             view = inflater.inflate(R.layout.my_row, parent, false);
@@ -57,23 +59,25 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.news_id_txt.setText(news_id.get(position));
         holder.news_title_txt.setText(news_title.get(position));
-        holder.news_sc_txt.setText(news_sc.get(position));
-        // Chỉ load hình ảnh nếu là layout row.xml
-        if (typeRow == '0' || typeRow == '2') {
-            Glide.with(context).load(news_image.get(position)).into(holder.thumbnail_input_img);
-        }
+        if(typeRow != '3')
+        {
+            holder.news_sc_txt.setText(news_sc.get(position));
+            // Chỉ load hình ảnh nếu là layout row.xml
+            if (typeRow == '0' || typeRow == '2') {
+                Glide.with(context).load(news_image.get(position)).into(holder.thumbnail_input_img);
+            }
 
-        holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, DetailActivity.class);
-            intent.putExtra("news_id", news_id.get(position));
-            context.startActivity(intent);
-        });
-        if (typeRow == '2'){
-            holder.edit.setOnClickListener(v -> {
-                Intent intent = new Intent(context, EditActivity.class);
+            holder.itemView.setOnClickListener(v -> {
+                Intent intent = new Intent(context, DetailActivity.class);
                 intent.putExtra("news_id", news_id.get(position));
                 context.startActivity(intent);
             });
+            if (typeRow == '2'){
+                holder.edit.setOnClickListener(v -> {
+                    Intent intent = new Intent(context, EditActivity.class);
+                    intent.putExtra("news_id", news_id.get(position));
+                    context.startActivity(intent);
+                });
 
 //            holder.del.setOnClickListener(v -> {
 //                MyDataHelper.(MyDataHelper.TABLE_NEWS, "id = ?", new String[]{news_id.get(position)});
@@ -83,7 +87,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 //                notifyItemRemoved(position);
 //                notifyItemRangeChanged(position, news_id.size());
 //            });
+            }
         }
+
 
     }
 

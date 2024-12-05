@@ -15,7 +15,8 @@
         android:id="@+id/content_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Content" />
+        android:hint="Content"
+        android:minLines="5"/>
 
     <EditText
         android:id="@+id/categoryId_input"
@@ -36,14 +37,20 @@
         android:id="@+id/selectThumbnail_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select Thumbnail" />
+        android:text="Select Thumbnail"
+        android:minLines="2"/>
 
     <EditText
         android:id="@+id/shortDescription_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Short Description" />
-
+    <EditText
+        android:id="@+id/createdDate_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Date"
+        android:inputType="datetime" />
     <Button
         android:id="@+id/createNews_button"
         android:layout_width="wrap_content"
