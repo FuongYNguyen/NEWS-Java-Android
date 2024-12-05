@@ -29,27 +29,17 @@ public class MyDataHelper extends SQLiteOpenHelper {
         String createRoleTable =
                 "CREATE TABLE " + TABLE_ROLE +
                         " (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        "name TEXT NOT NULL, " +
-                        "code TEXT NOT NULL UNIQUE, " +
-                        "createddate TIMESTAMP, " +
-                        "modifieddate TIMESTAMP, " +
-                        "createdby TEXT, " +
-                        "modifiedby TEXT);";
+                        "name TEXT NOT NULL)" ;
         db.execSQL(createRoleTable);
 
         // Tạo bảng User
         String createUserTable =
                 "CREATE TABLE " + TABLE_USER +
                         " (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        "username TEXT NOT NULL, " +
+                        "email TEXT NOT NULL, " +
                         "password TEXT NOT NULL, " +
-                        "fullname TEXT, " +
                         "status INTEGER NOT NULL, " +
                         "roleid INTEGER NOT NULL, " +
-                        "createddate TIMESTAMP, " +
-                        "modifieddate TIMESTAMP, " +
-                        "createdby TEXT, " +
-                        "modifiedby TEXT, " +
                         "FOREIGN KEY(roleid) REFERENCES " + TABLE_ROLE + "(id));";
         db.execSQL(createUserTable);
 
@@ -84,6 +74,8 @@ public class MyDataHelper extends SQLiteOpenHelper {
                         "FOREIGN KEY(userId) REFERENCES " + TABLE_USER + "(id), " +
                         "FOREIGN KEY(newId) REFERENCES " + TABLE_NEWS + "(id));";
         db.execSQL(createCommentTable);
+        insertDefaultRoles(db);
+
     }
 
     @Override
@@ -132,6 +124,40 @@ public class MyDataHelper extends SQLiteOpenHelper {
         }
     }
 
+    private void insertDefaultRoles(SQLiteDatabase db) {
+        ContentValues adminRole = new ContentValues();
+        adminRole.put("name", "Admin");
+        db.insert(TABLE_ROLE, null, adminRole);
 
+        ContentValues userRole = new ContentValues();
+        userRole.put("name", "User");
+        db.insert(TABLE_ROLE, null, userRole);
 
+        ContentValues guestRole = new ContentValues();
+        guestRole.put("name", "Guest");
+        db.insert(TABLE_ROLE, null, guestRole);
+    }
+
+    public Boolean insertData(String email, String password) {
+        SQLiteDatabase MyDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("email", email);
+        contentValues.put("password", password);
+        contentValues.put("roleid", 2);
+        contentValues.put("status", 1);
+        long result = MyDatabase.insert("user", null, contentValues);
+        return result != -1;
+    }
+    public Boolean checkEmail(String email){
+        SQLiteDatabase MyDatabase = this.getWritableDatabase();
+        Cursor cursor = MyDatabase.rawQuery("Select * from user where email = ?",
+                new String[]{email});
+        return cursor.getCount() > 0;
+    }
+    public Boolean checkEmailPassword(String email, String password){
+        SQLiteDatabase MyDatabase = this.getWritableDatabase();
+        Cursor cursor = MyDatabase.rawQuery("Select * from user where email = ? and password = ?", new String[]{email, password});
+        return cursor.getCount() > 0;
+    }
 }
+//test github nhanh cua Vi

@@ -1,5 +1,7 @@
 package com.example.data;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -31,18 +33,19 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // Clear session data
-                SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("UserSession", getContext().MODE_PRIVATE);
+                SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("UserSession", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.clear();
+                editor.clear(); // Clear all stored preferences
                 editor.apply();
+
+                // Show a success message
                 Toast.makeText(requireContext(), "Logout Successfully!", Toast.LENGTH_SHORT).show();
 
-                // Navigate back to LoginFragment
-                requireActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container, new LoginFragment())
-                        .addToBackStack(null)
-                        .commit();
+                // Navigate to LoginActivity
+                Intent intent = new Intent(requireActivity(), LoginActivity.class);
+                // Clear back stack to prevent navigation back to this fragment
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             }
         });
 
