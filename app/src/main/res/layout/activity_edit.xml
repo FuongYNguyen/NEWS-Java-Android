@@ -8,25 +8,48 @@
         android:id="@+id/edit_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Title" />
+        android:hint="Tiêu đề"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/inter_medium"
+        android:textColor="@color/black"
+        android:textSize="18sp"/>
 
     <EditText
         android:id="@+id/edit_short_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Short Description" />
+        android:hint="Mô tả ngắn"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/inter_medium"
+        android:textColor="@color/black"
+        android:textSize="18sp"/>
 
     <EditText
         android:id="@+id/edit_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Content"
-        android:minLines="5" />
+        android:hint="Nội dung"
+        android:minLines="5"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/inter_medium"
+        android:textColor="@color/black"
+        android:textSize="18sp"/>
 
     <Button
         android:id="@+id/update_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Update" />
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/mybutton"
+        android:fontFamily="@font/inter_extrabold"
+        android:padding="10dp"
+        android:radius="50dp"
+        android:text="Cập nhập"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 
 </LinearLayout>

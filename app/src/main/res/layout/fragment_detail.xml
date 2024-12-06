@@ -64,6 +64,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Bình luận:"
+                    android:fontFamily="@font/inter"
                     android:textSize="16sp"
                     android:padding="8dp"/>
             </LinearLayout>
@@ -88,13 +89,20 @@
             android:layout_weight="1"
             android:hint="Nhập bình luận của bạn..."
             android:padding="8dp"
-            android:background="@drawable/edittext_background"/>
+            android:background="@drawable/edittext_background"
+            android:fontFamily="@font/inter"
+            />
 
         <Button
             android:id="@+id/submitCommentButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Gửi"/>
+            android:text="Gửi"
+            android:fontFamily="@font/inter"
+            android:background="@drawable/mybutton"
+            android:textColor="@color/white"
+
+            />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
