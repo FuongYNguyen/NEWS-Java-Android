@@ -44,7 +44,7 @@
             android:drawableStart="@drawable/baseline_lock_24"
             android:drawablePadding="8dp"
             android:fontFamily="@font/inter"
-            android:hint="@string/password"
+            android:hint="Mật khẩu"
             android:inputType="textPassword"
             android:padding="15dp"
             android:textSize="13sp" />
@@ -60,7 +60,7 @@
             android:drawableStart="@drawable/baseline_password_24"
             android:drawablePadding="8dp"
             android:fontFamily="@font/inter"
-            android:hint="@string/confirm_password"
+            android:hint="Nhập lại mật khẩu"
             android:inputType="textPassword"
             android:padding="15dp"
             android:textSize="13sp"
@@ -71,16 +71,16 @@
             android:id="@+id/signup_button"
             android:layout_width="300dp"
             android:layout_height="50dp"
+            android:layout_gravity="center"
             android:layout_marginTop="30dp"
-            android:padding="10dp"
             android:background="@drawable/mybutton"
             android:fontFamily="@font/inter_extrabold"
-            android:text="@string/sign_up"
-            android:textColor="@color/white"
-            android:textSize="18sp"
+            android:padding="10dp"
             android:radius="50dp"
-            android:layout_gravity="center"
-            />
+            android:text="Tạo tài khoản"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/loginRedirectText"
@@ -90,7 +90,7 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/inter"
             android:padding="8dp"
-            android:text="@string/already_an_user_login"
+            android:text="Đã có tài khoản? Đăng nhập tại đây"
             android:textColor="@color/red77"
             android:textSize="12sp" />
     </LinearLayout>

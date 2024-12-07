@@ -36,7 +36,8 @@ public class SignupActivity extends AppCompatActivity {
                             Boolean insert = databaseHelper.insertData(email, password);
                             if (insert) {
                                 Toast.makeText(SignupActivity.this, "Signup Successfully!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(), LoginFragment.class);
+                                Intent intent = new Intent(getApplicationContext(),
+                                        LoginActivity.class);
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(SignupActivity.this, "Signup Failed!", Toast.LENGTH_SHORT).show();

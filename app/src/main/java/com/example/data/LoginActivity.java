@@ -38,12 +38,14 @@ public class LoginActivity extends AppCompatActivity {
                     boolean checkCredentials = databaseHelper.checkEmailPassword(email, password);
                     if (checkCredentials) {
                         int userId = databaseHelper.getUserId(email, password);
+                        int roleId = databaseHelper.getRoleId(email, password);
                         // Save login state in SharedPreferences
                         SharedPreferences sharedPreferences = getSharedPreferences("UserSession", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putBoolean("isLoggedIn", true); // Set login status to true
                         editor.putString("email", email); // Save email (optional)
-                        editor.putInt("userId", userId);      // Save user ID
+                        editor.putInt("userId", userId);
+                        editor.putInt("roleId", roleId);     // Save the roleId
                         editor.apply();
                         // Navigate to MainActivity
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);

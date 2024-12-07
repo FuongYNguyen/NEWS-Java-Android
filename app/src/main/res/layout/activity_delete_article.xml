@@ -4,45 +4,64 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="?android:attr/colorBackground">
+    android:background="?android:attr/colorBackground"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp"
+        android:layout_height="171dp"
+        android:layout_gravity="center"
+        android:background="@drawable/lavender_border"
         android:elevation="4dp"
         android:gravity="center"
-        android:layout_gravity="center">
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:radius="100dp">
 
         <TextView
+            android:id="@+id/TextDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bạn có muốn xóa bài viết này?"
-            android:textSize="18sp"
             android:layout_gravity="center"
-            android:paddingBottom="20dp"
-            android:textAlignment="center" />
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/inter_medium"
+            android:padding="8dp"
+            android:text="Bạn có muốn xóa bài viết này?"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
 
-        <LinearLayout
+        <com.google.android.flexbox.FlexboxLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:layout_height="match_parent"
+            app:justifyContent="space_between">
 
             <Button
                 android:id="@+id/buttonCancelDelete"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="8dp"
+                android:background="@color/white"
+                android:fontFamily="@font/inter_medium"
+                android:padding="8dp"
+                android:radius="6dip"
                 android:text="Cancel"
-                android:layout_marginEnd="8dp" />
+                android:textColor="@color/red77" />
 
             <Button
                 android:id="@+id/buttonConfirmDelete"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Delete" />
-        </LinearLayout>
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:background="@color/red77"
+                android:fontFamily="@font/inter_medium"
+                android:padding="8dp"
+                android:text="Delete"
+                android:radius="6dip"
+                android:textColor="@color/white" />
+        </com.google.android.flexbox.FlexboxLayout>
     </LinearLayout>
 </LinearLayout>
 

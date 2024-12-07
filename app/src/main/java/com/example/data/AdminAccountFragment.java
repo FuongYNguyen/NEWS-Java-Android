@@ -1,5 +1,6 @@
 package com.example.data;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,14 +12,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class AccountFragment extends Fragment {
+public class AdminAccountFragment extends Fragment {
 
-    public AccountFragment() {
+    public AdminAccountFragment() {
         // Required empty public constructor
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -27,7 +30,15 @@ public class AccountFragment extends Fragment {
 
         // Initialize the logout button
         Button logoutButton = view.findViewById(R.id.logoutButton);
+        // Find the TextView
+        TextView emailTextView = view.findViewById(R.id.emailTextView);
 
+        // Retrieve the email from SharedPreferences
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("UserSession", Context.MODE_PRIVATE);
+        String userEmail = sharedPreferences.getString("email", "Guest");
+        int roleId = sharedPreferences.getInt("roleId", -1);
+        // Set the email to the TextView
+        emailTextView.setText(userEmail);
         // Set up the logout button click listener
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override

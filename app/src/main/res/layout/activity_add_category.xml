@@ -5,17 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AddCategoryActivity">
+    tools:context=".AddCategoryActivity"
+    >
 
     <EditText
         android:id="@+id/name_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Name" />
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="250dp"
+        android:background="@drawable/lavender_border"
+        android:fontFamily="@font/inter"
+        android:hint="Nhập tên"
+        android:inputType="text"
+        android:padding="15dp"
+        android:textSize="13sp" />
 
     <Button
         android:id="@+id/create_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create" />
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/mybutton"
+        android:fontFamily="@font/inter_extrabold"
+        android:padding="10dp"
+        android:radius="50dp"
+        android:text="Tạo mới"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
 </LinearLayout>
