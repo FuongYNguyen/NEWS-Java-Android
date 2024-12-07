@@ -21,11 +21,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class CategoryFragment extends Fragment {
 
+public class CategoryManageFragment extends Fragment {
 
     private static final int ADD_ACTIVITY_REQUEST_CODE = 1;
     RecyclerView recyclerView;
+    FloatingActionButton add_button;
     MyDataHelper myDataHelper;
     ArrayList<String> category_id, category_name;
     CustomAdapter customAdapter;
@@ -35,9 +36,10 @@ public class CategoryFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_category, container, false);
+        View view = inflater.inflate(R.layout.fragment_category_manage, container, false);
 
         recyclerView = view.findViewById(R.id.recyclerView);
+        add_button = view.findViewById(R.id.add_button);
 
         myDataHelper = new MyDataHelper(getContext());
         category_id = new ArrayList<>();
@@ -45,7 +47,7 @@ public class CategoryFragment extends Fragment {
 
         storeDataInArrays();
 
-        customAdapter = new CustomAdapter(getContext(), category_id, category_name, null, null,null,null,'3');
+        customAdapter = new CustomAdapter(getContext(), category_id, category_name, null, null,null,null,'4');
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -57,6 +59,14 @@ public class CategoryFragment extends Fragment {
                         customAdapter.notifyDataSetChanged();
                     }
                 });
+
+        add_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), AddCategoryActivity.class);
+                addActivityResultLauncher.launch(intent);
+            }
+        });
 
         return view;
     }

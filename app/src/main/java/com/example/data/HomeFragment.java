@@ -22,7 +22,6 @@ public class HomeFragment extends Fragment {
 
     private static final int ADD_ACTIVITY_REQUEST_CODE = 1;
     RecyclerView recyclerView;
-    FloatingActionButton add_button;
     MyDataHelper myDataHelper;
     ArrayList<String> news_id, news_title, news_sc, news_image;
     CustomAdapter customAdapter;
@@ -35,7 +34,6 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         recyclerView = view.findViewById(R.id.recyclerView);
-        add_button = view.findViewById(R.id.add_button);
 
         myDataHelper = new MyDataHelper(getContext());
         news_id = new ArrayList<>();
@@ -58,13 +56,7 @@ public class HomeFragment extends Fragment {
                     }
                 });
 
-        add_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), AddActivity.class);
-                addActivityResultLauncher.launch(intent);
-            }
-        });
+
 
         return view;
     }

@@ -114,13 +114,17 @@ public class MyDataHelper extends SQLiteOpenHelper {
         String query = "SELECT * FROM news WHERE title LIKE ?";
         return db.rawQuery(query, new String[]{"%" + keyword + "%"});
     }
-    public void deleteData(String tableName, String whereClause, String[] whereArgs) {
+    public void deleteById(String tableName, int id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        int result = db.delete(tableName, whereClause, whereArgs);
-        if (result == -1) {
-            Toast.makeText(context, "Failed to Delete", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(context, "Deleted Successfully!", Toast.LENGTH_SHORT).show();
+        try {
+            int rowsDeleted = db.delete(tableName, "id = ?", new String[]{String.valueOf(id)});
+            if (rowsDeleted > 0) {
+                Toast.makeText(context, "Row with ID " + id + " deleted from " + tableName + "!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, "No row found with ID " + id + " in " + tableName + ".", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            Toast.makeText(context, "Error deleting row: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -143,7 +147,7 @@ public class MyDataHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put("email", email);
         contentValues.put("password", password);
-        contentValues.put("roleid", 2);
+        contentValues.put("roleid", 1);
         contentValues.put("status", 1);
         long result = MyDatabase.insert("user", null, contentValues);
         return result != -1;
@@ -190,6 +194,12 @@ public class MyDataHelper extends SQLiteOpenHelper {
 
         return roleid;
     }
+    public Cursor getNewsByCategory(String categoryId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_NEWS + " WHERE categoryId = ?";
+        return db.rawQuery(query, new String[]{categoryId});
+    }
+
 
 }
 

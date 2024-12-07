@@ -1,6 +1,8 @@
 package com.example.data;
 
+import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -61,6 +63,11 @@ public class EditActivity extends AppCompatActivity {
 
         myDataHelper.getWritableDatabase().update(MyDataHelper.TABLE_NEWS, values, "id = ?", new String[]{newsId});
         Toast.makeText(this, "Updated successfully!", Toast.LENGTH_SHORT).show();
+
+        // Trả kết quả về Fragment
+        Intent intent = new Intent();
+        setResult(Activity.RESULT_OK, intent);
         finish();
     }
+
 }

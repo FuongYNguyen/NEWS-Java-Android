@@ -30,6 +30,8 @@ public class AdminAccountFragment extends Fragment {
 
         // Initialize the logout button
         Button logoutButton = view.findViewById(R.id.logoutButton);
+        Button newsButton = view.findViewById(R.id.news_button);
+        Button categoryButton = view.findViewById(R.id.category_button);
         // Find the TextView
         TextView emailTextView = view.findViewById(R.id.emailTextView);
 
@@ -59,7 +61,28 @@ public class AdminAccountFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
+        newsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Replace current fragment with NewsManageFragment
+                requireActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, new NewsManageFragment()) // Replace 'fragment_container' with your actual container ID
+                        .addToBackStack(null) // Add to back stack for navigation
+                        .commit();
+            }
+        });
+        categoryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Replace current fragment with NewsManageFragment
+                requireActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, new CategoryManageFragment()) // Replace 'fragment_container' with your actual container ID
+                        .addToBackStack(null) // Add to back stack for navigation
+                        .commit();
+            }
+        });
         return view;
     }
 }

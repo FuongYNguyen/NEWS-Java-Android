@@ -48,7 +48,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             view = inflater.inflate(R.layout.row_news_manage, parent, false);
         } else if (typeRow == '3') {
             view = inflater.inflate(R.layout.row_category, parent, false);
-        } else {
+        } else if (typeRow == '4') {
+            view = inflater.inflate(R.layout.row_category_manage, parent, false);
+        } else if (typeRow == '5') {
+            view = inflater.inflate(R.layout.row_category, parent, false);
+        }else {
             // Inflate my_row.xml
             view = inflater.inflate(R.layout.my_row, parent, false);
         }
@@ -59,7 +63,37 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.news_id_txt.setText(news_id.get(position));
         holder.news_title_txt.setText(news_title.get(position));
-        if(typeRow != '3')
+        if (typeRow == '4'){
+            holder.del.setOnClickListener(v -> {
+                MyDataHelper db= new MyDataHelper(holder.itemView.getContext());
+                db.deleteById("category", Integer.parseInt(news_id.get(position)));
+                news_id.remove(position);
+                news_title.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, news_id.size());
+            });
+        }
+        if (typeRow == '3') {
+            holder.itemView.setOnClickListener(v -> {
+                // Lấy categoryId từ news_id
+                String categoryId = news_id.get(position);
+
+                // Chuyển đến Activity hiển thị các bài viết thuộc category này
+                Intent intent = new Intent(context, NewsByCategoryActivity.class);
+                intent.putExtra("category_id", categoryId);
+                context.startActivity(intent);
+            });
+        }
+        if (typeRow == '5') {
+            holder.itemView.setOnClickListener(v -> {
+                Intent intent = new Intent(context, DetailActivity.class);
+                intent.putExtra("news_id", news_id.get(position));
+                context.startActivity(intent);
+            });
+        }
+
+
+        if(typeRow != '3' && typeRow != '4' && typeRow != '5')
         {
             holder.news_sc_txt.setText(news_sc.get(position));
             // Chỉ load hình ảnh nếu là layout row.xml
@@ -79,14 +113,16 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                     context.startActivity(intent);
                 });
 
-//            holder.del.setOnClickListener(v -> {
-//                MyDataHelper.(MyDataHelper.TABLE_NEWS, "id = ?", new String[]{news_id.get(position)});
-//                news_id.remove(position);
-//                news_title.remove(position);
-//                news_sc.remove(position);
-//                notifyItemRemoved(position);
-//                notifyItemRangeChanged(position, news_id.size());
-//            });
+                holder.del.setOnClickListener(v -> {
+                    MyDataHelper db= new MyDataHelper(holder.itemView.getContext());
+                    db.deleteById("news", Integer.parseInt(news_id.get(position)));
+                    news_id.remove(position);
+                    news_title.remove(position);
+                    news_sc.remove(position);
+                    news_image.remove((position));
+                    notifyItemRemoved(position);
+                    notifyItemRangeChanged(position, news_id.size());
+                });
             }
         }
 
