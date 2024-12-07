@@ -185,5 +185,4 @@ public class DetailActivity extends AppCompatActivity {
                 .setNegativeButton("Hủy", null)
                 .show();
     }
-
 }
