@@ -85,22 +85,41 @@ public class DetailActivity extends AppCompatActivity {
 
         SQLiteDatabase db = myDataHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery(
-                "SELECT c.content, u.email, c.date_created FROM " + MyDataHelper.TABLE_COMMENT + " c " +
+                "SELECT c.id, c.content, u.email, c.date_created FROM " + MyDataHelper.TABLE_COMMENT + " c " +
                         "JOIN " + MyDataHelper.TABLE_USER + " u ON c.userId = u.id " +
                         "WHERE c.newId = ? ORDER BY c.date_created DESC",
                 new String[]{newsId});
 
         if (cursor != null && cursor.moveToFirst()) {
             do {
-                String content = cursor.getString(0);
-                String email = cursor.getString(1);
-                long dateCreated = cursor.getLong(2);
+                int commentId = cursor.getInt(0);  // Get comment ID
+                String content = cursor.getString(1);
+                String email = cursor.getString(2);
+                long dateCreated = cursor.getLong(3);
 
+                LinearLayout commentLayout = new LinearLayout(this);
+                commentLayout.setOrientation(LinearLayout.HORIZONTAL);
+                commentLayout.setPadding(8, 8, 8, 8);
+
+                // Create a TextView for the comment content
                 TextView commentView = new TextView(this);
                 commentView.setText(email + ": " + content);
-                commentView.setPadding(8, 8, 8, 8);
+                commentView.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
 
-                commentSection.addView(commentView);
+                // Create a Button to delete the comment
+                Button deleteButton = new Button(this);
+                deleteButton.setText("Xóa");
+                deleteButton.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+                // Set OnClickListener for the delete button
+                deleteButton.setOnClickListener(view -> deleteComment(commentId, newsId));
+
+                // Add the comment view and delete button to the layout
+                commentLayout.addView(commentView);
+                commentLayout.addView(deleteButton);
+
+                // Add the comment layout to the comment section
+                commentSection.addView(commentLayout);
             } while (cursor.moveToNext());
             cursor.close();
         } else {
@@ -110,6 +129,7 @@ public class DetailActivity extends AppCompatActivity {
             commentSection.addView(noCommentsView);
         }
     }
+
 
     private void submitComment(String newsId) {
         if (newsId == null || newsId.isEmpty()) {
@@ -147,4 +167,23 @@ public class DetailActivity extends AppCompatActivity {
             loadComments(newsId); // Tải lại danh sách bình luận
         }
     }
+    private void deleteComment(int commentId, String newsId) {
+        // Confirm deletion
+        new android.app.AlertDialog.Builder(this)
+                .setTitle("Xóa bình luận")
+                .setMessage("Bạn có chắc chắn muốn xóa bình luận này?")
+                .setPositiveButton("Xóa", (dialog, which) -> {
+                    SQLiteDatabase db = myDataHelper.getWritableDatabase();
+                    int rowsDeleted = db.delete(MyDataHelper.TABLE_COMMENT, "id = ?", new String[]{String.valueOf(commentId)});
+                    if (rowsDeleted > 0) {
+                        Toast.makeText(this, "Bình luận đã được xóa!", Toast.LENGTH_SHORT).show();
+                        loadComments(newsId);  // Reload the comments
+                    } else {
+                        Toast.makeText(this, "Lỗi khi xóa bình luận!", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("Hủy", null)
+                .show();
+    }
+
 }
