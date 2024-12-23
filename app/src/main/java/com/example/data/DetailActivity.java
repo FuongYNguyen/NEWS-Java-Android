@@ -22,10 +22,12 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 
+import java.nio.charset.StandardCharsets;
+
 public class DetailActivity extends AppCompatActivity {
 
     private ScrollView scrollView;
-    private TextView articleTitleTextView, articleTextView;
+    private TextView articleTitleTextView, articleTextView, date;
     private LinearLayout commentSection;
     private EditText commentEditText;
     private Button submitCommentButton;
@@ -43,8 +45,18 @@ public class DetailActivity extends AppCompatActivity {
         commentSection = findViewById(R.id.commentSection);
         commentEditText = findViewById(R.id.commentEditText);
         submitCommentButton = findViewById(R.id.submitCommentButton);
-
+        date= findViewById(R.id.date);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         myDataHelper = new MyDataHelper(this);
+
+        // Kích hoạt nút Back
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
+        toolbar.setNavigationOnClickListener(view -> finish());
 
         // Nhận news_id từ Intent
         String newsId = getIntent().getStringExtra("news_id");
@@ -66,10 +78,11 @@ public class DetailActivity extends AppCompatActivity {
         if (cursor != null && cursor.moveToFirst()) {
 
             String title = cursor.getString(1);
-            String imageUrl = cursor.getString(2);
+            String date_create = cursor.getString(5);
             String content = cursor.getString(4);
 
             articleTitleTextView.setText(title);
+            date.setText(date_create);
             articleTextView.setText(content);
         } else {
             Toast.makeText(this, "Không tìm thấy bài viết!", Toast.LENGTH_SHORT).show();

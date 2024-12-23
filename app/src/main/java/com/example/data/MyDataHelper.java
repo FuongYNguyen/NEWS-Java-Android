@@ -99,12 +99,23 @@ public class MyDataHelper extends SQLiteOpenHelper {
         }
     }
 
-    // Hàm đọc tất cả dữ liệu từ một bảng
+//    // Hàm đọc tất cả dữ liệu từ một bảng
+//    Cursor readAllData(String tableName) {
+//        String query = "SELECT * FROM " + tableName;
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        return db.rawQuery(query, null);
+//    }
     Cursor readAllData(String tableName) {
-        String query = "SELECT * FROM " + tableName;
+        String query;
+        if (tableName.equals(TABLE_NEWS)) {
+            query = "SELECT * FROM " + tableName + " ORDER BY date_created DESC";
+        } else {
+            query = "SELECT * FROM " + tableName;
+        }
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(query, null);
     }
+
     Cursor getbyNewsId(String newsId) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM news WHERE id = ?", new String[]{newsId});

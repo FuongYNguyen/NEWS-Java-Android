@@ -15,6 +15,10 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class AddActivity extends AppCompatActivity {
     EditText title_input, content_input, categoryId_input, thumbnail_input, shortDescription_input, createdDate_input;
     Button createNews_button, selectThumbnail_button;
@@ -72,7 +76,7 @@ public class AddActivity extends AppCompatActivity {
                     Toast.makeText(AddActivity.this, "Please fill all required fields", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                String currentDate = getCurrentDate();
                 // Thêm dữ liệu vào cơ sở dữ liệu
                 MyDataHelper myDB = new MyDataHelper(AddActivity.this);
                 ContentValues cv = new ContentValues();
@@ -87,7 +91,7 @@ public class AddActivity extends AppCompatActivity {
                     cv.put(COLUMN_THUMBNAIL, "No thumbnail");
                 }
                 cv.put(COLUMN_SHORT_DESCRIPTION, shortDescription_input.getText().toString().trim());
-                cv.put(COLUMN_CREATEDDATE, System.currentTimeMillis());
+                cv.put(COLUMN_CREATEDDATE, currentDate);
 
                 // Thêm dữ liệu vào bảng News
                 myDB.addData("News", cv);
@@ -100,7 +104,10 @@ public class AddActivity extends AppCompatActivity {
             }
         });
     }
-
+    private String getCurrentDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        return dateFormat.format(Calendar.getInstance().getTime());
+    }
     private String getFileName(Uri uri) {
         String result = null;
 

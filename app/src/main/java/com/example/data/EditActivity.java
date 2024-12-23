@@ -3,6 +3,7 @@ package com.example.data;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -65,8 +66,10 @@ public class EditActivity extends AppCompatActivity {
         Toast.makeText(this, "Updated successfully!", Toast.LENGTH_SHORT).show();
 
         // Trả kết quả về Fragment
-        Intent intent = new Intent();
-        setResult(Activity.RESULT_OK, intent);
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("isUpdated", true);
+        editor.apply();
         finish();
     }
 
