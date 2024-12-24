@@ -1,55 +1,69 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
-
-    <EditText
-        android:id="@+id/edit_title"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Tiêu đề"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/inter_medium"
-        android:textColor="@color/black"
-        android:textSize="18sp"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <EditText
-        android:id="@+id/edit_short_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Mô tả ngắn"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/inter_medium"
-        android:textColor="@color/black"
-        android:textSize="18sp"/>
+        <EditText
+            android:id="@+id/edit_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tiêu đề"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
 
-    <EditText
-        android:id="@+id/edit_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nội dung"
-        android:minLines="5"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/inter_medium"
-        android:textColor="@color/black"
-        android:textSize="18sp"/>
+        <EditText
+            android:id="@+id/edit_short_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mô tả ngắn"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+        <ImageView
+            android:id="@+id/edit_thumbnail_view"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="Current Thumbnail"
+            android:scaleType="centerCrop" />
 
-    <Button
-        android:id="@+id/update_button"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/mybutton"
-        android:fontFamily="@font/inter_extrabold"
-        android:padding="10dp"
-        android:radius="50dp"
-        android:text="Cập nhập"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
+        <Button
+            android:id="@+id/select_image_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Select Image" />
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/edit_content"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/inter_medium"
+            android:hint="Nội dung"
+            android:minLines="5"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/update_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/mybutton"
+            android:fontFamily="@font/inter_extrabold"
+            android:padding="10dp"
+            android:radius="50dp"
+            android:text="Cập nhập"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </LinearLayout>
