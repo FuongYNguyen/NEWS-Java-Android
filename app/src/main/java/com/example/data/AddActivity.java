@@ -10,6 +10,7 @@ import android.provider.OpenableColumns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -20,7 +21,8 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class AddActivity extends AppCompatActivity {
-    EditText title_input, content_input, categoryId_input, thumbnail_input, shortDescription_input, createdDate_input;
+    EditText title_input, content_input, categoryId_input, shortDescription_input, createdDate_input;
+    ImageView thumbnailView;
     Button createNews_button, selectThumbnail_button;
     Uri selectedImageUri;
 
@@ -31,6 +33,7 @@ public class AddActivity extends AppCompatActivity {
     public static final String COLUMN_CREATEDDATE = "date_created";
     public static final String COLUMN_SHORT_DESCRIPTION = "shortDescription";
 
+    private ActivityResultLauncher<Intent> imagePickerLauncher;
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,22 +44,23 @@ public class AddActivity extends AppCompatActivity {
         title_input = findViewById(R.id.title_input);
         content_input = findViewById(R.id.content_input);
         categoryId_input = findViewById(R.id.categoryId_input);
-        thumbnail_input = findViewById(R.id.thumbnail_input);
+        thumbnailView = findViewById(R.id.thumbnail_view);
         shortDescription_input = findViewById(R.id.shortDescription_input);
         createNews_button = findViewById(R.id.createNews_button);
         selectThumbnail_button = findViewById(R.id.selectThumbnail_button);
 
         // Cài đặt Intent để chọn ảnh từ thư viện
-        ActivityResultLauncher<Intent> imagePickerLauncher = registerForActivityResult(
+        imagePickerLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                         selectedImageUri = result.getData().getData();
                         if (selectedImageUri != null) {
-                            thumbnail_input.setText(getFileName(selectedImageUri)); // Hiển thị tên tệp hình ảnh
+                            thumbnailView.setImageURI(selectedImageUri); // Hiển thị ảnh lên ImageView
                         }
                     }
-                });
+                }
+        );
 
         // Khi nhấn vào nút "Select Thumbnail"
         selectThumbnail_button.setOnClickListener(view -> {
@@ -108,34 +112,34 @@ public class AddActivity extends AppCompatActivity {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         return dateFormat.format(Calendar.getInstance().getTime());
     }
-    private String getFileName(Uri uri) {
-        String result = null;
-
-        // Kiểm tra nếu URI thuộc loại 'content'
-        if (uri.getScheme().equals("content")) {
-            try (Cursor cursor = getContentResolver().query(uri, null, null, null, null)) {
-                if (cursor != null && cursor.moveToFirst()) {
-                    int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
-                    if (nameIndex >= 0) {
-                        result = cursor.getString(nameIndex);
-                    }
-                }
-            }
-        }
-
-        // Fallback nếu không lấy được DISPLAY_NAME
-        if (result == null) {
-            result = uri.getLastPathSegment();
-        }
-
-        // Kiểm tra và xử lý trường hợp tên file không xác định
-        if (result == null || result.isEmpty()) {
-            Toast.makeText(this, "Cannot retrieve file name", Toast.LENGTH_SHORT).show();
-            result = "Unknown File";
-        }
-
-        return result;
-    }
+//    private String getFileName(Uri uri) {
+//        String result = null;
+//
+//        // Kiểm tra nếu URI thuộc loại 'content'
+//        if (uri.getScheme().equals("content")) {
+//            try (Cursor cursor = getContentResolver().query(uri, null, null, null, null)) {
+//                if (cursor != null && cursor.moveToFirst()) {
+//                    int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+//                    if (nameIndex >= 0) {
+//                        result = cursor.getString(nameIndex);
+//                    }
+//                }
+//            }
+//        }
+//
+//        // Fallback nếu không lấy được DISPLAY_NAME
+//        if (result == null) {
+//            result = uri.getLastPathSegment();
+//        }
+//
+//        // Kiểm tra và xử lý trường hợp tên file không xác định
+//        if (result == null || result.isEmpty()) {
+//            Toast.makeText(this, "Cannot retrieve file name", Toast.LENGTH_SHORT).show();
+//            result = "Unknown File";
+//        }
+//
+//        return result;
+//    }
 
 
 }
