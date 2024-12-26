@@ -1,6 +1,11 @@
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
 
@@ -13,7 +18,7 @@
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/inter_medium"
             android:textColor="@color/black"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/edit_short_description"
@@ -24,7 +29,21 @@
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/inter_medium"
             android:textColor="@color/black"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
+        <EditText
+            android:id="@+id/edit_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/inter_medium"
+            android:hint="Nội dung"
+            android:minLines="5"
+            android:maxLines="10"
+            android:scrollbars="vertical"
+            android:overScrollMode="ifContentScrolls"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
         <ImageView
             android:id="@+id/edit_thumbnail_view"
             android:layout_width="match_parent"
@@ -40,16 +59,6 @@
             android:layout_marginBottom="16dp"
             android:text="Select Image" />
 
-        <EditText
-            android:id="@+id/edit_content"
-            android:layout_width="match_parent"
-            android:layout_height="66dp"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="@font/inter_medium"
-            android:hint="Nội dung"
-            android:minLines="5"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
 
         <Button
             android:id="@+id/update_button"
@@ -60,10 +69,9 @@
             android:background="@drawable/mybutton"
             android:fontFamily="@font/inter_extrabold"
             android:padding="10dp"
-            android:radius="50dp"
             android:text="Cập nhập"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="18sp" />
-
     </LinearLayout>
+</ScrollView>
