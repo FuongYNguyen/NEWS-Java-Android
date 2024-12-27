@@ -1,6 +1,8 @@
 package com.example.data;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 
@@ -30,7 +32,7 @@ public class NewsManageFragment extends Fragment {
     ArrayList<String> news_id, news_title, news_sc, news_image;
     CustomAdapter customAdapter;
 
-    private ActivityResultLauncher<Intent> addActivityResultLauncher;
+    public ActivityResultLauncher<Intent> addActivityResultLauncher;
 
     @Nullable
     @Override
@@ -90,4 +92,23 @@ public class NewsManageFragment extends Fragment {
             }
         }
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        boolean isUpdated = sharedPreferences.getBoolean("isUpdated", false);
+
+        if (isUpdated) {
+            // Reload dữ liệu
+            storeDataInArrays();
+            customAdapter.notifyDataSetChanged();
+
+            // Reset trạng thái
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("isUpdated", false);
+            editor.apply();
+        }
+    }
+
 }
