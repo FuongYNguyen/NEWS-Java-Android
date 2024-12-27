@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
+import android.util.Log;
+
 
 public class MyDataHelper extends SQLiteOpenHelper {
     private Context context;
@@ -22,6 +24,7 @@ public class MyDataHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
     }
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -160,7 +163,7 @@ public class MyDataHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put("email", email);
         contentValues.put("password", password);
-        contentValues.put("roleid", 1);
+        contentValues.put("roleid", 2);
         contentValues.put("status", 1);
         long result = MyDatabase.insert("user", null, contentValues);
         return result != -1;
@@ -332,11 +335,43 @@ public class MyDataHelper extends SQLiteOpenHelper {
         news5.put("date_created", "26/12/2024");
         news5.put("categoryId", 5);
         db.insert(TABLE_NEWS, null, news5);
-
-
     }
+    public boolean updateUser(String oldEmail, String newEmail, String newPassword) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("email", newEmail);
+        contentValues.put("password", newPassword);
 
+        // In giá trị để kiểm tra
+        Log.d("DatabaseHelper", "Updating user - Old Email: " + oldEmail + ", New Email: " + newEmail);
 
+        // Cập nhật bản ghi dựa trên email cũ
+        int result = db.update("user", contentValues, "email=?", new String[]{oldEmail});
 
+        // In kết quả cập nhật
+        Log.d("DatabaseHelper", "Update result: " + result);
+
+        return result > 0; // Trả về true nếu cập nhật thành công
+    }
+    public boolean deleteUser(String email) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // In giá trị để kiểm tra
+        Log.d("DatabaseHelper", "Deleting user with email: " + email);
+
+        // Xóa bản ghi dựa trên email
+        int result = db.delete("user", "email=?", new String[]{email});
+
+        // In kết quả xóa
+        Log.d("DatabaseHelper", "Delete result: " + result);
+
+        return result > 0; // Trả về true nếu xóa thành công
+    }
 }
+
+
+
+
+
+
 

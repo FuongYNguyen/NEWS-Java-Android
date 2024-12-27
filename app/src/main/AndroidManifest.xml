@@ -34,6 +34,12 @@
             android:name=".DetailActivity"
             android:exported="false" />
         <activity
+            android:name=".UserAccountManagementActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditUserAccountActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
