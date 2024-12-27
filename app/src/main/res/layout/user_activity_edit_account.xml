@@ -6,67 +6,75 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     tools:context=".EditUserAccountActivity">
-
-    <!-- Avatar -->
-    <ImageView
-        android:id="@+id/avatarImageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="20dp"
-        android:src="@drawable/user_image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- Email -->
-    <EditText
-        android:id="@+id/emailEditText"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/avatarImageView" />
+        android:orientation="vertical"
+        android:layout_marginTop="150dp"
+        android:padding="20dp">
 
-    <!-- Password -->
-    <EditText
-        android:id="@+id/passwordEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:hint="Mật khẩu mới"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/emailEditText" />
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="150dp"
+            android:autofillHints="Email"
+            android:background="@drawable/lavender_border"
+            android:drawableStart="@drawable/baseline_mail_24"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/inter"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:padding="15dp"
+            android:textSize="13sp" />
 
-    <!-- Confirm Button -->
-    <Button
-        android:id="@+id/confirmButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="Xác nhận"
-        android:background="#FF6200EE"
-        android:textColor="#FFFFFF"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toStartOf="@id/cancelButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passwordEditText" />
+        <EditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:autofillHints="Password"
+            android:background="@drawable/lavender_border"
+            android:drawableStart="@drawable/baseline_lock_24"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/inter"
+            android:hint="Mật khẩu mới"
+            android:inputType="textPassword"
+            android:padding="15dp"
+            android:textSize="13sp" />
 
-    <!-- Cancel Button -->
-    <Button
-        android:id="@+id/cancelButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="Hủy"
-        android:background="#FF0000"
-        android:textColor="#FFFFFF"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/confirmButton"
-        app:layout_constraintTop_toBottomOf="@id/passwordEditText" />
+        <com.google.android.flexbox.FlexboxLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:justifyContent="space_between"
+            android:layout_marginTop="40dp"
+            >
+
+            <Button
+                android:id="@+id/confirmButton"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/mybutton"
+                android:text="Xác nhận"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:padding="8dp"
+                />
+
+            <Button
+                android:id="@+id/cancelButton"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:text="Hủy"
+                android:textAllCaps="false"
+                android:textColor="@color/red77" />
+
+        </com.google.android.flexbox.FlexboxLayout>
+
+        <!-- Cancel Button -->
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

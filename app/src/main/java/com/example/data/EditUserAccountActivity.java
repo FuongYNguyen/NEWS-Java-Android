@@ -24,7 +24,6 @@ public class EditUserAccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_activity_edit_account);
-        avatarImageView = findViewById(R.id.avatarImageView);
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         Button confirmButton = findViewById(R.id.confirmButton);

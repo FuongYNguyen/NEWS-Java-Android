@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,65 +8,80 @@
     tools:context=".UserAccountManagementActivity">
 
     <!-- Avatar -->
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/shapeableImageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="20dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/user_image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/CustomShapeAppearance" />
 
-    <!-- Email -->
-    <TextView
-        android:id="@+id/emailTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="Email"
-        android:textSize="20sp"
-        android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/shapeableImageView"/>
-
-    <!-- Button Container -->
     <LinearLayout
-        android:id="@+id/buttonContainer"
-        android:layout_width="0dp"
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/emailTextView">
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        android:padding="30dp">
 
-        <!-- Edit Button -->
+        <com.google.android.flexbox.FlexboxLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:justifyContent="space_between">
+
+            <TextView
+                android:id="@+id/hello2"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:autofillHints="Email"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/inter_extrabold"
+                android:text="Trung tâm tài khoản"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/shapeableImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/user_image"
+                app:shapeAppearanceOverlay="@style/CustomShapeAppearance" />
+        </com.google.android.flexbox.FlexboxLayout>
+
+        <TextView
+            android:id="@+id/emailTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome!"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
         <Button
             android:id="@+id/editAccountButton"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_weight="1"
-            android:layout_marginEnd="8dp"
-            android:background="#FF6200EE"
+            android:layout_marginTop="60dp"
+            android:background="#0000"
+            android:drawableStart="@drawable/baseline_manage_accounts_24"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/inter_medium"
             android:text="Sửa thông tin tài khoản"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:textAllCaps="false"/>
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="14sp" />
 
-        <!-- Delete Button -->
+
         <Button
             android:id="@+id/deleteAccountButton"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_weight="1"
-            android:layout_marginStart="8dp"
-            android:background="#FF0000"
+            android:layout_marginTop="40dp"
+            android:background="@color/red77"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/inter_medium"
             android:text="Xóa tài khoản"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:textAllCaps="false"/>
+            android:textAlignment="gravity"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

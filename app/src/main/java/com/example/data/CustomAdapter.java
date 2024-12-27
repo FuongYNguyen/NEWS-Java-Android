@@ -52,7 +52,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             view = inflater.inflate(R.layout.row_category_manage, parent, false);
         } else if (typeRow == '5') {
             view = inflater.inflate(R.layout.row_category, parent, false);
-        }else {
+        }
+        else {
             // Inflate my_row.xml
             view = inflater.inflate(R.layout.my_row, parent, false);
         }

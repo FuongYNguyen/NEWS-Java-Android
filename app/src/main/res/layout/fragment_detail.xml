@@ -41,7 +41,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="24sp"
-                android:padding="8dp"/>
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                />
             <TextView
                 android:id="@+id/date"
                 android:layout_width="match_parent"
@@ -55,7 +58,7 @@
                 android:id="@+id/articleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:padding="8dp"/>
 
             <!-- Bình luận -->

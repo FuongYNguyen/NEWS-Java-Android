@@ -32,6 +32,9 @@ public class AdminAccountFragment extends Fragment {
         Button logoutButton = view.findViewById(R.id.logoutButton);
         Button newsButton = view.findViewById(R.id.news_button);
         Button categoryButton = view.findViewById(R.id.category_button);
+        Button account_button = view.findViewById(R.id.account_button);
+        Button account_manage_button = view.findViewById(R.id.account_manage_button);
+
         // Find the TextView
         TextView emailTextView = view.findViewById(R.id.emailTextView);
 
@@ -83,6 +86,21 @@ public class AdminAccountFragment extends Fragment {
                         .commit();
             }
         });
+        account_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(requireActivity(), UserAccountManagementActivity.class);
+                startActivity(intent);
+            }
+        });
+        account_manage_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(requireActivity(), AdminAccountManageActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
 }

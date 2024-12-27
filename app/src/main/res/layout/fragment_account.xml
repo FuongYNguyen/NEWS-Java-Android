@@ -59,7 +59,21 @@
             android:drawableStart="@drawable/baseline_manage_accounts_24"
             android:drawablePadding="8dp"
             android:fontFamily="@font/inter_medium"
-            android:text="Quản lý tài khoản"
+            android:text="Quản lý tài khoản cá nhân"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/account_manage_button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#0000"
+            android:drawableStart="@drawable/baseline_supervisor_account_24"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/inter_medium"
+            android:text="Quản lý tài khoản người dùng"
             android:textAlignment="textStart"
             android:textAllCaps="false"
             android:textColor="#000000"

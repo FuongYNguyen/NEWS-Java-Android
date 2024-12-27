@@ -47,7 +47,7 @@
                 android:fontFamily="@font/inter_medium"
                 android:padding="8dp"
                 android:radius="6dip"
-                android:text="Cancel"
+                android:text="hủy"
                 android:textColor="@color/red77" />
 
             <Button
@@ -58,7 +58,7 @@
                 android:background="@color/red77"
                 android:fontFamily="@font/inter_medium"
                 android:padding="8dp"
-                android:text="Delete"
+                android:text="Xóa"
                 android:radius="6dip"
                 android:textColor="@color/white" />
         </com.google.android.flexbox.FlexboxLayout>

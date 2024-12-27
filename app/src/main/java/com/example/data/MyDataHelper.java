@@ -13,7 +13,7 @@ import android.util.Log;
 public class MyDataHelper extends SQLiteOpenHelper {
     private Context context;
     public static final String DATABASE_NAME = "news.db";
-    public static final int DATABASE_VERSION = 6;
+    public static final int DATABASE_VERSION = 7;
     public static final String TABLE_NEWS = "News";
     public static final String TABLE_CATEGORY = "Category";
     public static final String TABLE_ROLE = "role";
