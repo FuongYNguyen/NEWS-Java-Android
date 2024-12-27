@@ -29,6 +29,9 @@ public class UserAccountFragment extends Fragment {
 
         // Initialize the logout button
         Button logoutButton = view.findViewById(R.id.logoutButton);
+
+        Button account_button = view.findViewById(R.id.account_button);
+
         // Find the TextView
         TextView emailTextView = view.findViewById(R.id.emailTextView);
 
@@ -58,6 +61,14 @@ public class UserAccountFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        account_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(requireActivity(), UserAccountManagementActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         return view;
     }
