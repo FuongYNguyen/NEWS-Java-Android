@@ -51,15 +51,15 @@
                 android:id="@+id/news_title_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="4dp"
                 android:maxLines="4"
+                android:padding="1sp"
                 android:text="TextView"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/news_id_txt"
-                app:layout_constraintTop_toTopOf="@+id/news_id_txt"
-                android:padding="1sp"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/thumbnail_input_img" />
 
             <TextView
                 android:id="@+id/news_sc_txt"

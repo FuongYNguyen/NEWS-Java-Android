@@ -63,7 +63,7 @@ public class MyDataHelper extends SQLiteOpenHelper {
                         "content TEXT NOT NULL, " +
                         "date_created TIMESTAMP, " +
                         "categoryId INTEGER NOT NULL, " +
-                        "FOREIGN KEY(categoryId) REFERENCES " + TABLE_CATEGORY + "(id));";
+                        "FOREIGN KEY(categoryId) REFERENCES " + TABLE_CATEGORY + "(id) ON DELETE CASCADE);";
         db.execSQL(createNewsTable);
 
         // Tạo bảng Comment
@@ -91,6 +91,11 @@ public class MyDataHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ROLE);
         onCreate(db);
+    }
+    @Override
+    public void onConfigure(SQLiteDatabase db) {
+        super.onConfigure(db);
+        db.setForeignKeyConstraintsEnabled(true); // Kích hoạt hỗ trợ khóa ngoại
     }
 
     // Hàm thêm dữ liệu vào bảng
@@ -163,7 +168,7 @@ public class MyDataHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put("email", email);
         contentValues.put("password", password);
-        contentValues.put("roleid", 2);
+        contentValues.put("roleid", 1);
         contentValues.put("status", 1);
         long result = MyDatabase.insert("user", null, contentValues);
         return result != -1;
